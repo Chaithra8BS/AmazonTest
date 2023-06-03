@@ -19,8 +19,7 @@ public class AmazonTest {
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		//webdriver -> interface used for all browser drivers
 		//if we use chromedriver it will be used only for chrome driver.not for FF browser.
-		WebDriver driver = new ChromeDriver();
-		
+		WebDriver driver = new ChromeDriver();		
 		driver.get("https://www.amazon.in/");
 		
 		driver.manage().window().maximize();
@@ -33,12 +32,17 @@ public class AmazonTest {
 		
 		//read the locators using xpath
 		List<WebElement> productname = driver.findElements(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']//h2//span"));
-		List<WebElement> productprice = driver.findElements(By.xpath("//div[@class='a-section a-spacing-none a-spacing-top-micro s-price-instructions-style']//div//span[@class='a-price']"));
+		List<WebElement> productprice = driver.findElements(By.xpath("//div[@class='a-row a-size-base a-color-base']//span[@class='a-price']//span[@class='a-price-whole']"));
+
+
 		System.out.println("All the products on the results " + productname.size());
+		System.out.println("All the price on the results " + productprice.size());
 		for(int i=0;i<productname.size();i++)
 			{
 				System.out.println("product name : " + productname.get(i).getText());
-				System.out.println("product price : " + productprice.get(i).getText());					}
+				System.out.println("product price : " + productprice.get(i).getText());					
+				
+			}
 			
 		
 		//take screenshot:
@@ -49,12 +53,8 @@ public class AmazonTest {
 		
 		FileUtils.copyFile(fileobj, screenshotobj);
 		driver.close();
-
-		//	List<WebElement> productprice = driver.findElements(By.xpath("//div[@class='a-section a-spacing-none a-spacing-top-micro s-price-instructions-style']//div//span[@class='a-price']"));
-		//	for(WebElement x:listprice)
-		//	{
-		//		System.out.println(x.getText());
-		//	}							
+		
+						
 
 	}
 
